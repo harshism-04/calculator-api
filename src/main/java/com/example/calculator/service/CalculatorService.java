@@ -1,4 +1,5 @@
 package com.example.calculator.service;
+import com.example.calculator.exception.DivisionByZeroException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -21,6 +22,13 @@ public class CalculatorService {
 
     public int div(int a,int b)
     {
-        return a/b;
+        if(b==0)
+        {
+            throw new DivisionByZeroException("Cannot Divide By Zero");
+        }
+        else
+        {
+            return a / b;
+        }
     }
 }

@@ -1,11 +1,7 @@
 package com.example.calculator.controller;
 import com.example.calculator.dto.CalculatorResponse;
 import com.example.calculator.service.CalculatorService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-import com.example.calculator.dto.CalculatorResponse;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/calc")
@@ -41,4 +37,5 @@ public class CalculatorController {
         int result = calculatorService.div(a,b);
         return new CalculatorResponse("divide",a,b,result);
     }
-    }
+
+}
