@@ -1,5 +1,6 @@
 package com.example.calculator.exception;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import com.example.calculator.dto.ErrorResponse;
@@ -14,5 +15,19 @@ public class GlobalExceptionHandler {
         return ResponseEntity
                 .badRequest()
                 .body(errorResponse);
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<ErrorResponse> handleValidationErrors(MethodArgumentNotValidException ex)
+    {
+        String message = ex.getBindingResult()
+                .getFieldErrors()
+                .get(0)
+                .getDefaultMessage();
+
+        ErrorResponse errorResponse = new ErrorResponse(400,"Bad Request", message);
+                return ResponseEntity
+                        .badRequest()
+                        .body(errorResponse);
     }
 }
